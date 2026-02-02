@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* ============================================
+   DESIGN SYSTEM - ABSTRACCIÓN SEMÁNTICA (WCAG AA)
+   ============================================ */
+
+:root {
+  /* Common Brand Tokens */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-secondary: #7c3aed;
+  
+  /* Light Theme (Default) */
+  --color-text-primary: #0f172a;    /* Slate 900 - Contraste 15:1 */
+  --color-text-secondary: #334155;  /* Slate 700 - Contraste 9:1 */
+  --color-text-muted: #475569;     /* Slate 600 - Contraste 7:1 */
+  --color-text-inverse: #ffffff;
+  
+  --color-bg-main: #f8fafc;        /* Slate 50 */
+  --color-bg-card: #ffffff;
+  --color-bg-input: #ffffff;
+  --color-bg-sidebar: #1e293b;
+  
+  --color-border: #e2e8f0;         /* Slate 200 */
+  --color-border-focus: #4f46e5;
+  
+  --color-shadow: 79, 70, 229;
+  --color-gradient-from: #4f46e5;
+  --color-gradient-to: #7c3aed;
+
+  /* Status Colors - WCAG AA compliant */
+  --color-success: #16a34a;
+  --color-success-bg: #dcfce7;
+  --color-success-text: #15803d;
+  --color-danger: #dc2626;
+  --color-danger-bg: #fee2e2;
+  --color-danger-text: #b91c1c;
+}
+
+
+/* ============================================
+   TRANSICIÓN GLOBAL Y ACCESIBILIDAD
+   ============================================ */
+
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.1s ease;
+}
+
+body {
+  background-color: var(--color-bg-main);
+  color: var(--color-text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+
+/* Clases de Utilidad Semánticas */
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+
+.bg-main { background-color: var(--color-bg-main); }
+.bg-card { background-color: var(--color-bg-card); }
+
+.bg-brand-gradient {
+  background: linear-gradient(135deg, var(--color-gradient-from), var(--color-gradient-to));
+}
+
+.shadow-themed {
+  box-shadow: 0 4px 12px rgba(var(--color-shadow), 0.3);
+}
+
+/* Componentes Profesionales Heretando Tokens */
+.themed-card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+}
+
+.themed-input {
+  background-color: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  padding: 0.625rem 1rem;
+  border-radius: 0.75rem;
+}
+
+.themed-input:focus {
+  border-color: var(--color-border-focus);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-border-focus);
+}

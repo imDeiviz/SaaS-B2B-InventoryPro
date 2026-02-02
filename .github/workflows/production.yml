@@ -1,0 +1,51 @@
+name: Production CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install dependencies & Build Server
+      run: |
+        cd server
+        npm install
+        npm run build
+
+    - name: Install dependencies & Build Client
+      run: |
+        cd client
+        npm install
+        npm run build
+      env:
+        VITE_API_URL: ${{ secrets.VITE_API_URL }}
+
+  # Step for automated deployment (Example for SSH/Docker)
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   steps:
+  #     - name: Deploy to Server via SSH
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.SERVER_IP }}
+  #         username: ${{ secrets.SERVER_USER }}
+  #         key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #         script: |
+  #           cd /path/to/project
+  #           git pull origin main
+  #           docker compose -f docker-compose.prod.yml up -d --build
